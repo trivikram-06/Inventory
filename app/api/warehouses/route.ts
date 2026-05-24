@@ -2,13 +2,23 @@ import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
 
+export const dynamic = "force-dynamic"
+
 export async function GET(){
 
- const warehouses =
- await prisma.warehouse.findMany()
+try{
 
- return Response.json(
- warehouses
- )
+const warehouses=
+await prisma.warehouse.findMany()
+
+return Response.json(
+warehouses
+)
+
+}catch{
+
+return Response.json([])
+
+}
 
 }

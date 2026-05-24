@@ -2,41 +2,55 @@ import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
 
-export async function POST(req:Request){
+export const dynamic = "force-dynamic"
 
- const body =
- await req.json()
+export async function POST(req: Request){
 
- const reservation =
- await prisma.reservation.create({
+try{
 
- data:{
+const body = await req.json()
 
- productId:
- body.productId,
+const reservation =
+await prisma.reservation.create({
 
- warehouseId:
- body.warehouseId,
+data:{
 
- quantity:
- body.quantity,
+productId:
+body.productId,
 
- status:"PENDING",
+warehouseId:
+body.warehouseId,
 
- expiresAt:
- new Date(
+quantity:
+body.quantity,
 
- Date.now()+
- 5*60*1000
+status:"PENDING",
 
- )
+expiresAt:
+new Date(
 
- }
+Date.now()+
+5*60*1000
 
- })
+)
 
- return Response.json(
- reservation
- )
+}
+
+})
+
+return Response.json(
+reservation
+)
+
+}catch(error){
+
+console.log(error)
+
+return Response.json(
+{error:"Failed"},
+{status:500}
+)
+
+}
 
 }
