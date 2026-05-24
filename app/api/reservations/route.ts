@@ -1,8 +1,8 @@
 import { PrismaClient } from "@prisma/client"
 
-const prisma = new PrismaClient()
-
 export const dynamic = "force-dynamic"
+
+const prisma = new PrismaClient()
 
 export async function POST(req: Request){
 
@@ -28,10 +28,8 @@ status:"PENDING",
 
 expiresAt:
 new Date(
-
 Date.now()+
 5*60*1000
-
 )
 
 }
@@ -47,7 +45,7 @@ reservation
 console.log(error)
 
 return Response.json(
-{error:"Failed"},
+{message:"Error"},
 {status:500}
 )
 
