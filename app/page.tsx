@@ -8,7 +8,11 @@ const [products,setProducts]=useState<any[]>([])
 
 async function loadProducts(){
 
-const res=await fetch("/api/products")
+const res=await fetch("/api/products",{
+
+cache:"no-store"
+
+})
 
 const data=await res.json()
 
